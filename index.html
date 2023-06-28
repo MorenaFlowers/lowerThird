@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* página toda*/
+        body{
+            background-color: blueviolet;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+        }
+        /* div curtir */
+        #curtir{
+            position: absolute;
+            background-color: aliceblue;
+            width: 440px;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            top: 800px;
+            left: 300px;
+            transition: top 1.5s ease;
+            box-shadow: 10px 5px 5px black;
+        }
+        /* botão like */
+        #btnCurtir{
+            background-color: lightgray;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        /* botão inscreva-se */
+        #btnInsc{
+            background-color: lightgray;
+            width: auto;
+            padding-inline: 20px;
+            line-height: 40px;
+            border-radius: 10px;
+        }
+        /* botão sininho */        
+        #btnSino{
+            background-color: lightgray;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        /* imagens dentro do botão */        
+        .icone{
+            width: 20px;
+            height: 20px;
+            margin: 10px;
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <button id="btnMostrar" onclick="mostrar(10)">iniciar</button>
+    <!-- fazer uma caixa de curtir -->
+    <div id="curtir">
+        <!-- dizeres 'curta e compartilhe' e 'inscreva-se' -->
+        <div style="display: flex; flex-direction: column; align-items: center; height: auto;">
+            <div>CURTA E COMPARTILHE</div>
+            <DIV style="color: red;">INSCREVA-SE</DIV>
+        </div>
+        <!-- botão like -->
+        <div id="btnCurtir"><img src="like.png" class="icone" id="img1"></div>
+        <!-- botão 'inscreva-se' -->
+        <div id="btnInsc"><span>INSCREVA-SE</span></div>
+        <!-- botão sino -->
+        <div id="btnSino"><img src="bell.png" class="icone"  id="img2" ></div>
+    </div>
+    <script>
+        // declarar elementos
+        var boxLike = document.getElementById('curtir');
+        var iconLike = document.getElementById('img1');
+        var iconBell = document.getElementById('img2');
+        var btnCurtir = document.getElementById('btnCurtir');
+        var btnSino = document.getElementById('btnSino');
+        var btnInsc = document.getElementById('btnInsc');
+        var btnMostrar = document.getElementById('btnMostrar');
+        var somClick = new Audio('click.mp3');
+        var somSino = new Audio('bell.mp3');
+        function showCurtir(){
+            // 0s subir
+            // 1.5s mover like 45 e deixar vermelho
+            // 2.0s mover like -45 
+            // 2.5s mover like 0
+            // 3.5s clicar no inscreva-se
+            // 5.0s mover sino 45 e deixar vermelho
+            // 5.5s mover sino -45 
+            // 6.0s mover sino 0
+            // 8.0s baixar boxLike
+            // 9.0s zerar cores para cinza
+            
+            boxLike.style.top = '250px';
+            setTimeout(function () {
+                somClick.play();
+                btnCurtir.style.backgroundColor = 'red';
+                iconLike.style.transform = 'rotate(45deg)';
+            },1500);
+            setTimeout(function () {
+                iconLike.style.transform = 'rotate(-45deg)';
+            },2000);
+            setTimeout(function () {
+                iconLike.style.transform = 'rotate(0deg)';
+            },2500);
+            setTimeout(function () {
+                btnInsc.style.backgroundColor = 'red';
+                btnInsc.style.color = 'white';
+                somClick.play();
+            },3500);
+            setTimeout(function () {
+                iconBell.style.transform = 'rotate(45deg)';
+                btnSino.style.backgroundColor = 'red';
+                somSino.play();
+            },5000);
+            setTimeout(function () {
+                iconBell.style.transform = 'rotate(-45deg)';
+            },5500);
+            setTimeout(function () {
+                iconBell.style.transform = 'rotate(0deg)';
+            },6000);
+            setTimeout(function(){
+                boxLike.style.top = '800px';
+            },8000);
+            setTimeout(function(){
+                btnCurtir.style.background = 'lightgray';
+                btnInsc.style.background = 'lightgray';
+                btnSino.style.background = 'lightgray';    
+            },9000);
+        }
+        function mostrar(segundos){
+            segundos = segundos *1000;
+            setInterval(showCurtir,segundos);
+        }
+
+    </script>
+</body>
+</html>
